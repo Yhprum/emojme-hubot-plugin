@@ -184,11 +184,10 @@ Questions, comments, concerns? Ask em either on emojme, or on <https://github.co
         util.doubleEnhance emoji.url, emoji.name, size, (filename, enhanced_image_file_stream) ->
           opts = {
             title: "#{emoji.name} ENHANCE!!1!",
-            filename: filename,
             file: enhanced_image_file_stream,
             channels: request.message.room
           }
-          web.files.upload(opts).finally ->
+          robot.adapter.client.web.files.upload(filename, opts).finally ->
             fs.unlinkSync filename
 
 
