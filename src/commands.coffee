@@ -32,7 +32,7 @@
 #   Jack Ellenberger <jellenberger@uchicago.edu>
 Conversation = require 'hubot-conversation'
 chrono = require('chrono-node')
-{ WebClient } = require '@slack/client'
+{ WebClient } = require '@slack/web-api'
 fs = require 'graceful-fs'
 
 Util = require './util'
