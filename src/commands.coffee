@@ -40,7 +40,7 @@ Util = require './util'
 module.exports = (robot) ->
   util = new Util robot
   robot.emojmeConversation = new Conversation robot
-  web = new WebClient robot.adapter.options.token
+  web = new WebClient
 
   robot.respond /emojme help/i, (request) ->
     request.send("""
@@ -184,10 +184,12 @@ Questions, comments, concerns? Ask em either on emojme, or on <https://github.co
         util.doubleEnhance emoji.url, emoji.name, size, (filename, enhanced_image_file_stream) ->
           opts = {
             title: "#{emoji.name} ENHANCE!!1!",
+            filename: filename,
             file: enhanced_image_file_stream,
-            channels: request.message.room
+            channels: request.message.room,
+            token: robot.adapter.options.token
           }
-          robot.adapter.client.web.files.upload(filename, opts).finally ->
+          web.files.upload(opts).finally ->
             fs.unlinkSync filename
 
 
